@@ -43,6 +43,23 @@ public class TaskController {
         return this.taskRepository.findByIdUser((UUID) idUser);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity getByid(@PathVariable UUID id, HttpServletRequest request) {
+        var task = this.taskRepository.findById(id).orElse(null);
+
+        var idUser = request.getAttribute("idUser");
+
+        if(task == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tarefa não encontrada!");
+        }
+
+        if(!task.getIdUser().equals(idUser)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário sem autorização para alterar essa tarefa!");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(task);
+    }
+
     //Para conseguir atualizar uma entidade, utilize o put que salva no contexto de atualização
     @PutMapping("/{id}")
     public ResponseEntity update(@RequestBody TaskModel taskModel, @PathVariable UUID id, HttpServletRequest request) {
@@ -62,5 +79,22 @@ public class TaskController {
         var taskUpdated = this.taskRepository.save(task);
 
         return ResponseEntity.status(HttpStatus.OK).body(taskUpdated);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete (@PathVariable UUID id, HttpServletRequest request) {
+        var task = this.taskRepository.findById(id).orElse(null);
+        var idUser = request.getAttribute("idUser");
+
+        if(task == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tarefa não encontrada!");
+        }
+
+        if(!task.getIdUser().equals(idUser)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário sem autorização para deletar essa tarefa!");
+        }
+
+        this.taskRepository.deleteById(task.getId());
+
+        return ResponseEntity.status(HttpStatus.OK).body("Tarefa deletada com sucesso!");
     }
 }
