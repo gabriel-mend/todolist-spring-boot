@@ -1,8 +1,15 @@
 package br.com.gabriel.todolist.task;
 
 import br.com.gabriel.todolist.utils.Utils;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +18,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+
+
+
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
@@ -18,6 +28,7 @@ public class TaskController {
     @Autowired
     private ITaskRepository taskRepository;
 
+    @Operation(security = @SecurityRequirement(name = "basicAuth"))
     @PostMapping("/")
     public ResponseEntity create (@RequestBody TaskModel taskModel, HttpServletRequest request) {
         var idUser = request.getAttribute("idUser");
