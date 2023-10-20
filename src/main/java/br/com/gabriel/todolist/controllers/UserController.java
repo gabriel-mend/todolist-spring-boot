@@ -1,6 +1,8 @@
-package br.com.gabriel.todolist.user;
+package br.com.gabriel.todolist.controllers;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import br.com.gabriel.todolist.repositories.IUserRepository;
+import br.com.gabriel.todolist.models.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,15 +1,12 @@
-package br.com.gabriel.todolist.task;
+package br.com.gabriel.todolist.controllers;
 
+import br.com.gabriel.todolist.repositories.ITaskRepository;
+import br.com.gabriel.todolist.models.TaskModel;
 import br.com.gabriel.todolist.utils.Utils;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

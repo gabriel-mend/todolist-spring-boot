@@ -1,7 +1,7 @@
 package br.com.gabriel.todolist.filter;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import br.com.gabriel.todolist.user.IUserRepository;
+import br.com.gabriel.todolist.repositories.IUserRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
