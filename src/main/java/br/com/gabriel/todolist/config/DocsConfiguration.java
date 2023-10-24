@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
         scheme = "basic"
 )
 @OpenAPIDefinition(
-        info = @Info(title = "Sample API", version = "v1")
+        info = @Info(title = "TodoList API", version = "v1")
 )
 public class DocsConfiguration {
 

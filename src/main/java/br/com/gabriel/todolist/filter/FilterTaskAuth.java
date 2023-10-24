@@ -1,7 +1,7 @@
 package br.com.gabriel.todolist.filter;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import br.com.gabriel.todolist.user.IUserRepository;
+import br.com.gabriel.todolist.repositories.IUserRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,13 +37,11 @@ public class FilterTaskAuth extends OncePerRequestFilter {
             String username = credentials[0];
             String password = credentials[1];
 
-            // Validar usuário existe
             var user = this.userRepository.findByUsername(username);
 
             if (user == null) {
                 response.sendError(401, "Usuário sem autorização!");
             } else {
-                // Validar senha do usuário
                 var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
 
                 if (passwordVerify.verified) {

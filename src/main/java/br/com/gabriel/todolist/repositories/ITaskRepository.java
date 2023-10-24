@@ -1,5 +1,6 @@
-package br.com.gabriel.todolist.task;
+package br.com.gabriel.todolist.repositories;
 
+import br.com.gabriel.todolist.models.TaskModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
