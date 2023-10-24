@@ -37,13 +37,11 @@ public class FilterTaskAuth extends OncePerRequestFilter {
             String username = credentials[0];
             String password = credentials[1];
 
-            // Validar usuário existe
             var user = this.userRepository.findByUsername(username);
 
             if (user == null) {
                 response.sendError(401, "Usuário sem autorização!");
             } else {
-                // Validar senha do usuário
                 var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
 
                 if (passwordVerify.verified) {
