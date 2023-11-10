@@ -1,7 +1,10 @@
 FROM ubuntu:latest as BUILD
 
 RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
+RUN apt-get install openjdk-17-jdk postgresql -y
+RUN service postgresql start && \
+  psql -h localhost -U postgres -d postgres -c "CREATE DATABASE todospring"
+
 
 COPY . .
 
